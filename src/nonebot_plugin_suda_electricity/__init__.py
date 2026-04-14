@@ -38,7 +38,7 @@ __plugin_meta__ = PluginMetadata(
         "version": __version__,
     },
 )
-# TODO 数据库加密
+
 driver = get_driver()
 
 
