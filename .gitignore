@@ -211,3 +211,4 @@ __marimo__/
 .pytest-localstore/
 .tmp/
 backup/
+suda.code-workspace
