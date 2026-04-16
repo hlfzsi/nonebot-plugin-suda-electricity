@@ -1,6 +1,6 @@
 [project]
 name = "nonebot_plugin_suda_electricity"
-version = "0.1.0"
+version = "0.2.0"
 description = "苏州大学宿舍电费查询与推送"
 readme = "README.md"
 requires-python = ">=3.11"
