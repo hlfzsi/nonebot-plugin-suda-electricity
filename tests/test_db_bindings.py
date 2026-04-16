@@ -92,7 +92,7 @@ def _load_repo_modules():
     fake_package.__path__ = [str(_PACKAGE_ROOT)]
 
     fake_utils = types.ModuleType("nonebot_plugin_suda_electricity.utils")
-    fake_utils.APP_CONFIG = types.SimpleNamespace(database_url="")
+    fake_utils.APP_CONFIG = types.SimpleNamespace(suda_database_url="")
     fake_utils.BASE_DATA_DIR = Path.cwd() / ".pytest-localstore"
     fake_utils.DATABASE_DATA_DIR = Path.cwd() / ".pytest-localstore"
     fake_utils.logger = logging.getLogger("test-utils")

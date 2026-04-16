@@ -19,7 +19,7 @@ def compute_initial_check_at(
     if now is None:
         now = int(time.time())
     if interval_hours is None:
-        interval_hours = APP_CONFIG.scheduler_interval_hours
+        interval_hours = APP_CONFIG.suda_scheduler_interval_hours
     return compute_next_check_at(
         from_timestamp=now,
         interval_hours=interval_hours,

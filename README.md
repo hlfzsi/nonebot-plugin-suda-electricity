@@ -46,10 +46,10 @@ nb-cli plugin install nonebot_plugin_suda_electricity
 | 配置项 | 是否必填 | 默认值 | 说明 |
 | :-- | :-- | :-- | :-- |
 | `suda_secret_key` | 是 | 无 | 用于加密本地存储的敏感信息，请使用高强度且仅自己掌握的字符串。 |
-| `database_url` | 否 | 本地 SQLite 文件 | 数据库连接地址。 |
-| `scheduler_interval_hours` | 否 | `8` | 每个宿舍的固定检查间隔（小时）。 |
-| `scheduler_tick_seconds` | 否 | `60` | 调度器扫描到期任务的周期（秒）。 |
-| `scheduler_due_limit` | 否 | `10` | 单次扫描最多处理的到期宿舍数量。 |
+| `suda_database_url` | 否 | 本地 SQLite 文件 | 数据库连接地址。 |
+| `suda_scheduler_interval_hours` | 否 | `8` | 每个宿舍的固定检查间隔（小时）。 |
+| `suda_scheduler_tick_seconds` | 否 | `60` | 调度器扫描到期任务的周期（秒）。 |
+| `suda_scheduler_due_limit` | 否 | `10` | 单次扫描最多处理的到期宿舍数量。 |
 
 示例（`.env`）：
 

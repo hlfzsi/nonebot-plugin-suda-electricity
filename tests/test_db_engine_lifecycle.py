@@ -30,7 +30,7 @@ def _load_modules(db_dir: Path):
     fake_package.__spec__.submodule_search_locations = [str(_PACKAGE_ROOT)]
 
     fake_utils = types.ModuleType("nonebot_plugin_suda_electricity.utils")
-    fake_utils.APP_CONFIG = types.SimpleNamespace(database_url="")
+    fake_utils.APP_CONFIG = types.SimpleNamespace(suda_database_url="")
     fake_utils.BASE_DATA_DIR = db_dir.parent
     fake_utils.DATABASE_DATA_DIR = db_dir
     fake_utils.logger = logging.getLogger("test-utils")

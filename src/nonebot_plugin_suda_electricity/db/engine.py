@@ -34,7 +34,7 @@ class _Lock:
 
 WRITE_LOCK = _Lock()
 _db_path = DATABASE_DATA_DIR / "suda_electricity.db"
-_DATABASE_URL = APP_CONFIG.database_url or f"sqlite+aiosqlite:///{_db_path.as_posix()}"
+_DATABASE_URL = APP_CONFIG.suda_database_url or f"sqlite+aiosqlite:///{_db_path.as_posix()}"
 
 ENGINE = create_async_engine(
     _DATABASE_URL,

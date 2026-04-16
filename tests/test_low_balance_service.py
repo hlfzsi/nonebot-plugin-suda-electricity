@@ -72,7 +72,7 @@ def _load_modules():
     fake_package.__spec__.submodule_search_locations = [str(_PACKAGE_ROOT)]
 
     fake_utils = types.ModuleType("nonebot_plugin_suda_electricity.utils")
-    fake_utils.APP_CONFIG = types.SimpleNamespace(database_url="")
+    fake_utils.APP_CONFIG = types.SimpleNamespace(suda_database_url="")
     fake_utils.BASE_DATA_DIR = Path.cwd() / ".pytest-localstore"
     fake_utils.DATABASE_DATA_DIR = Path.cwd() / ".pytest-localstore"
     fake_utils.logger = logging.getLogger("test-utils")
@@ -227,9 +227,9 @@ async def test_scheduler_dispatches_due_dormitory_with_decrypted_user(
         observer_registry=registry,
         config=config_module.Config(
             suda_secret_key="test-secret-key-32-chars-min!",
-            scheduler_interval_hours=2,
-            scheduler_tick_seconds=60,
-            scheduler_due_limit=10,
+            suda_scheduler_interval_hours=2,
+            suda_scheduler_tick_seconds=60,
+            suda_scheduler_due_limit=10,
         ),
         now_provider=lambda: 1_000,
     )
@@ -284,9 +284,9 @@ async def test_scheduler_skips_when_no_due_dormitory(modules, repository_bundle)
         observer_registry=observer_module.DormitoryScheduleObserverRegistry(),
         config=config_module.Config(
             suda_secret_key="test-secret-key-32-chars-min!",
-            scheduler_interval_hours=2,
-            scheduler_tick_seconds=60,
-            scheduler_due_limit=10,
+            suda_scheduler_interval_hours=2,
+            suda_scheduler_tick_seconds=60,
+            suda_scheduler_due_limit=10,
         ),
         now_provider=lambda: 1_000,
     )

@@ -46,7 +46,7 @@ def _load_scheduler_modules():
     fake_package.__path__ = [str(_PACKAGE_ROOT)]
 
     fake_utils = types.ModuleType("nonebot_plugin_suda_electricity.utils")
-    fake_utils.APP_CONFIG = types.SimpleNamespace(database_url="")
+    fake_utils.APP_CONFIG = types.SimpleNamespace(suda_database_url="")
     fake_utils.BASE_DATA_DIR = Path.cwd() / ".pytest-localstore"
     fake_utils.DATABASE_DATA_DIR = Path.cwd() / ".pytest-localstore"
     fake_utils.logger = logging.getLogger("test-utils")
@@ -211,9 +211,9 @@ async def test_scheduler_service_reschedules_due_dormitory_and_notifies_observer
         dormitory_repository=FakeRepo(),
         observer_registry=observer_registry,
         config=SimpleNamespace(
-            scheduler_interval_hours=8,
-            scheduler_tick_seconds=60,
-            scheduler_due_limit=10,
+            suda_scheduler_interval_hours=8,
+            suda_scheduler_tick_seconds=60,
+            suda_scheduler_due_limit=10,
         ),
         now_provider=lambda: 1_000,
     )
@@ -246,9 +246,9 @@ async def test_scheduler_service_start_stop_and_is_running(scheduler_modules) ->
         dormitory_repository=FakeRepo(),
         observer_registry=scheduler_modules["scheduler"].DormitoryScheduleObserverRegistry(),
         config=SimpleNamespace(
-            scheduler_interval_hours=8,
-            scheduler_tick_seconds=0.01,
-            scheduler_due_limit=10,
+            suda_scheduler_interval_hours=8,
+            suda_scheduler_tick_seconds=0.01,
+            suda_scheduler_due_limit=10,
         ),
         now_provider=lambda: 1_000,
     )
@@ -281,9 +281,9 @@ async def test_scheduler_service_run_forever_handles_errors_and_timeouts(
         dormitory_repository=FakeRepo(),
         observer_registry=scheduler_modules["scheduler"].DormitoryScheduleObserverRegistry(),
         config=SimpleNamespace(
-            scheduler_interval_hours=8,
-            scheduler_tick_seconds=0.01,
-            scheduler_due_limit=10,
+            suda_scheduler_interval_hours=8,
+            suda_scheduler_tick_seconds=0.01,
+            suda_scheduler_due_limit=10,
         ),
         now_provider=lambda: 1_000,
     )
@@ -335,9 +335,9 @@ async def test_scheduler_service_skips_when_lock_is_held(scheduler_modules) -> N
         dormitory_repository=LockedRepo(),
         observer_registry=scheduler_module.DormitoryScheduleObserverRegistry(),
         config=SimpleNamespace(
-            scheduler_interval_hours=8,
-            scheduler_tick_seconds=60,
-            scheduler_due_limit=10,
+            suda_scheduler_interval_hours=8,
+            suda_scheduler_tick_seconds=60,
+            suda_scheduler_due_limit=10,
         ),
         now_provider=lambda: 1_000,
     )
@@ -381,9 +381,9 @@ async def test_scheduler_service_handles_update_failures_and_observer_errors(
         dormitory_repository=FakeRepo(),
         observer_registry=registry,
         config=SimpleNamespace(
-            scheduler_interval_hours=8,
-            scheduler_tick_seconds=60,
-            scheduler_due_limit=10,
+            suda_scheduler_interval_hours=8,
+            suda_scheduler_tick_seconds=60,
+            suda_scheduler_due_limit=10,
         ),
         now_provider=lambda: 1_000,
     )
@@ -408,7 +408,7 @@ def test_compute_initial_check_at_uses_config_when_missing(scheduler_modules, mo
     monkeypatch.setattr(
         schedule_module,
         "APP_CONFIG",
-        SimpleNamespace(scheduler_interval_hours=5),
+        SimpleNamespace(suda_scheduler_interval_hours=5),
     )
 
     assert schedule_module.compute_initial_check_at(now=1_000) == 1_000 + 5 * 60 * 60

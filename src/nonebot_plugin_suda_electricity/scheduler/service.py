@@ -76,7 +76,7 @@ class DormitorySchedulerService:
             now = self._now_provider()
             due_dormitories = await self._dormitory_repository.list_due_details(
                 now=now,
-                limit=self._config.scheduler_due_limit,
+                limit=self._config.suda_scheduler_due_limit,
             )
             report = SchedulerDispatchReport(
                 checked_dormitories=len(due_dormitories),
@@ -85,7 +85,7 @@ class DormitorySchedulerService:
             for dormitory_detail in due_dormitories:
                 next_check_at = compute_next_check_at(
                     from_timestamp=now,
-                    interval_hours=self._config.scheduler_interval_hours,
+                    interval_hours=self._config.suda_scheduler_interval_hours,
                 )
                 updated = await self._dormitory_repository.update_check_schedule(
                     dormitory_key=dormitory_detail.dormitory.dormitory_key,
@@ -119,7 +119,7 @@ class DormitorySchedulerService:
             try:
                 await asyncio.wait_for(
                     self._stop_event.wait(),
-                    timeout=self._config.scheduler_tick_seconds,
+                    timeout=self._config.suda_scheduler_tick_seconds,
                 )
             except TimeoutError:
                 continue
